@@ -15,7 +15,7 @@ class CredentialsModal extends Component {
                     <Modal.Title>Credentials</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <QRCode 
+                    <QRCode
                         value={this.props.config} 
                         size={256}
                         style={{margin: "0 auto", display: "block"}} />

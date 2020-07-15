@@ -17,6 +17,7 @@ class WireguardAPI {
             withCredentials: true
         })
         .then(response => response.json())
+        .then(devices => devices.sort((first, second) => first.ID - second.ID))
     }
 
     async newDevice(deviceInfo) {

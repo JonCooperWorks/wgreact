@@ -3,6 +3,8 @@ import  Button from 'react-bootstrap/Button';
 import FileSaver from 'file-saver';
 
 import AddDeviceModal from './components/AddDeviceModal';
+import ConfirmRekeyModal from './components/ConfirmRekeyModal'
+import ConfirmDeleteModal from './components/ConfirmDeleteModal'
 import CredentialsModal from './components/CredentialsModal';
 import Device from './components/Device'
 import DeletedAlert from './components/DeletedAlert'
@@ -19,23 +21,27 @@ class Dashboard extends Component {
             showCredentialsModal: false,
             showAddDeviceModal: false,
             showConfirmDeleteModal: false,
+            showConfirmRekeyModal: false,
             displayedCredentials: "",
             newDevice: {
                 Name: "",
-                OS: ""
+                OS: "macOS" // Default option in the Form.Control
             },
-            deviceToDelete: {}
+            deviceToDelete: {},
+            deviceToRekey: {}
         }
         this.onAlertClosed = this.onAlertClosed.bind(this)
         this.onCredentialsModalClosed = this.onCredentialsModalClosed.bind(this)
-        this.onCoznfigDownload = this.onConfigDownload.bind(this)
+        this.onConfigDownload = this.onConfigDownload.bind(this)
         this.onAddDeviceClicked = this.onAddDeviceClicked.bind(this)
         this.onAddDeviceModalClosed = this.onAddDeviceModalClosed.bind(this)
         this.onDeviceAdded = this.onDeviceAdded.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.onFormSubmitted.bind(this)
+        this.handleChange = this.onFormTextChange.bind(this)
         this.onDeviceDeleted = this.onDeviceDeleted.bind(this)
         this.onConfirmDeleteModalClosed = this.onConfirmDeleteModalClosed.bind(this)
+        this.onConfirmRekeyDevice = this.onConfirmRekeyDevice.bind(this)
+        this.onConfirmRekeyModalClosed = this.onConfirmRekeyModalClosed.bind(this)
         this.loadDevices = this.loadDevices.bind(this)
         this.wireguardAPI = new WireguardAPI()
     }
@@ -71,7 +77,7 @@ class Dashboard extends Component {
         this.setState(() => {
             return {
                 showCredentialsModal: false,
-                displayedCredential: ""
+                displayedCredentials: ""
             }
         })
         this.loadDevices()
@@ -115,16 +121,27 @@ class Dashboard extends Component {
                     deviceToDelete: {}
                 }
             })
+
+            const timer = setTimeout(() => this.setState(
+                () => {
+                    return {showDeletedAlert: false}
+                }
+            ), 3000);
+            return () => clearTimeout(timer);
+            
         })
     }
 
     onConfirmDeleteModalClosed() {
         this.setState(() => {
-            return {showConfirmDeleteModal: false}
+            return {
+                showConfirmDeleteModal: false,
+                deviceToDelete: {}
+            }
         })
     }
 
-    handleSubmit(event) {
+    onFormSubmitted(event) {
         this.wireguardAPI.newDevice({
             Name: this.state.newDevice.Name,
             OS: this.state.newDevice.OS
@@ -135,7 +152,7 @@ class Dashboard extends Component {
         event.preventDefault()
     }
 
-    handleChange(fieldName) {
+    onFormTextChange(fieldName) {
         return (event) => {
             event.persist()
             this.setState((state) => {
@@ -143,6 +160,29 @@ class Dashboard extends Component {
                 return state
             })
         }
+    }
+
+    onConfirmRekeyDevice() {
+        this.wireguardAPI.rekeyDevice(this.state.deviceToRekey.ID)
+        .then(config => {
+            this.setState(() => {
+                return {
+                    showCredentialsModal: true,
+                    displayedCredentials: config,
+                    showConfirmRekeyModal: false,
+                    deviceToRekey: {}
+                }
+            })
+        })
+    }
+
+    onConfirmRekeyModalClosed() {
+        this.setState(() => {
+            return {
+                showConfirmRekeyModal: false,
+                deviceToRekey: {}
+            }
+        })
     }
 
     render() {
@@ -156,15 +196,13 @@ class Dashboard extends Component {
         })
 
         const rekeyHandlers = this.state.devices.map((device, index) => () => {
-            this.wireguardAPI.rekeyDevice(device.ID)
-            .then(config => {
-                this.setState(() => {
-                    return {
-                        showCredentialsModal: true,
-                        displayedCredentials: config
-                    }
-                })
+            this.setState(() => {
+                return {
+                    showConfirmRekeyModal: true,
+                    deviceToRekey: device
+                }
             })
+           
         })
 
         return (
@@ -184,8 +222,14 @@ class Dashboard extends Component {
                     show={this.state.showAddDeviceModal}
                     onClose={this.onAddDeviceModalClosed}
                     onSuccess={this.onDeviceAdded}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit} />
+                    onFormTextChange={this.onFormTextChange}
+                    onFormSubmitted={this.onFormSubmitted} />
+
+                <ConfirmRekeyModal
+                    show={this.state.showConfirmRekeyModal}
+                    onConfirmed={this.onConfirmRekeyDevice}
+                    onClose={this.onConfirmRekeyModalClosed}
+                    device={this.state.deviceToRekey} />
 
                 <ConfirmDeleteModal
                     show={this.state.showConfirmDeleteModal}

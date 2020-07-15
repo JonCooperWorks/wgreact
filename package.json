@@ -6,6 +6,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "file-saver": "^2.0.2",
+    "js-cookie": "^2.2.1",
     "qrcode.react": "^1.0.0",
     "react": "^16.9.0",
     "react-bootstrap": "^1.2.2",

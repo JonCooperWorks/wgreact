@@ -16,10 +16,10 @@ class AddDeviceModal extends Component {
                     <Modal.Title>Add Device</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={this.props.handleSubmit}>
+                    <Form onSubmit={this.props.onFormSubmitted}>
                         <Form.Group controlId="formDeviceOS">
                             <Form.Label>Device OS</Form.Label>
-                            <Form.Control name="OS" as="select" custom onChange={this.props.handleChange("OS")}>
+                            <Form.Control name="OS" as="select" custom onChange={this.props.onFormTextChange("OS")}>
                                 <option value="macOS">macOS</option>
                                 <option value="Windows">Windows</option>
                                 <option value="Linux">Linux</option>
@@ -30,7 +30,7 @@ class AddDeviceModal extends Component {
 
                         <Form.Group controlId="formDeviceName">
                             <Form.Label>Nickname</Form.Label>
-                            <Form.Control name="Name" type="text" placeholder="Device Nickname" onChange={this.props.handleChange("Name")} />
+                            <Form.Control name="Name" type="text" placeholder="Device Nickname" onChange={this.props.onFormTextChange("Name")} />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Add Device
