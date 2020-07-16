@@ -36,8 +36,8 @@ class Dashboard extends Component {
         this.onAddDeviceClicked = this.onAddDeviceClicked.bind(this)
         this.onAddDeviceModalClosed = this.onAddDeviceModalClosed.bind(this)
         this.onDeviceAdded = this.onDeviceAdded.bind(this)
-        this.handleSubmit = this.onFormSubmitted.bind(this)
-        this.handleChange = this.onFormTextChange.bind(this)
+        this.onFormSubmitted = this.onFormSubmitted.bind(this)
+        this.onFormTextChange = this.onFormTextChange.bind(this)
         this.onDeviceDeleted = this.onDeviceDeleted.bind(this)
         this.onConfirmDeleteModalClosed = this.onConfirmDeleteModalClosed.bind(this)
         this.onConfirmRekeyDevice = this.onConfirmRekeyDevice.bind(this)
@@ -142,6 +142,7 @@ class Dashboard extends Component {
     }
 
     onFormSubmitted(event) {
+        event.preventDefault()
         this.wireguardAPI.newDevice({
             Name: this.state.newDevice.Name,
             OS: this.state.newDevice.OS
@@ -149,7 +150,6 @@ class Dashboard extends Component {
         .then(config => {
             this.onDeviceAdded(config)
         })
-        event.preventDefault()
     }
 
     onFormTextChange(fieldName) {
