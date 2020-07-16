@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import QRCode from 'qrcode.react'
@@ -12,15 +13,15 @@ class CredentialsModal extends Component {
                 keyboard={false}
                 onHide={this.props.onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Credentials</Modal.Title>
+                    <Modal.Title>Wireguard Config</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p
-                        style={{margin: "0 auto", display: "block"}}>
+                    <Alert
+                        variant="warning">
                             This is your Wireguard private key.
-                            Store it in a safe place.
-                            You will not be able to download this key again after it is created.
-                    </p>
+                            For your safety, you won't be able to download it again.
+                            Store it in a <strong>safe</strong> place.
+                    </Alert>
                     <QRCode
                         value={this.props.config} 
                         size={256}
