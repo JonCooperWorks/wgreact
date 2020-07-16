@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import OSBadge from "./OSBadge";
 
 
 class Device extends Component {
@@ -9,10 +10,10 @@ class Device extends Component {
         return (
             <Card>
                 <Card.Title>
+                    <OSBadge OS={this.props.device.OS} />
                     {this.props.device.Name}
                 </Card.Title>
                 <Card.Body>
-                    <p>{this.props.device.OS}</p>
                     <p>{this.props.device.PublicKey}</p>
                     <p>{this.props.device.IPAddress}</p>
                     <Button 
