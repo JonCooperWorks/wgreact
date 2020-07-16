@@ -19,9 +19,11 @@ class Device extends Component {
                     style={{marginLeft: "5px"}}>{this.props.device.OS}</Card.Subtitle>
                 <Card.Body>
                     <CopyableValue
+                        label="Public Key"
                         value={this.props.device.PublicKey} /> 
                             
                     <CopyableValue
+                        label="IP Address"
                         value= {this.props.device.IPAddress} />
 
                     <Button 

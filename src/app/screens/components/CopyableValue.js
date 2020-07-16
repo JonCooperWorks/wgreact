@@ -25,6 +25,7 @@ class CopyableValue extends Component {
                 <Form.Row className="align-items-center">
                     <Col xs="auto">
                         <Form.Group>
+                            <Form.Label>{this.props.label}</Form.Label>
                             <InputGroup>
                                 <Form.Control
                                     value={this.props.value}
