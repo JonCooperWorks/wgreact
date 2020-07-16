@@ -9,14 +9,13 @@ class AddDeviceModal extends Component {
         return (
             <Modal
                 show={this.props.show}
-                backdrop="static"
                 keyboard={false}
                 onHide={this.props.onClose}>
+                <Form onSubmit={this.props.onFormSubmitted}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Device</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={this.props.onFormSubmitted}>
                         <Form.Group controlId="formDeviceOS">
                             <Form.Label>Device OS</Form.Label>
                             <Form.Control name="OS" as="select" custom onChange={this.props.onFormTextChange("OS")}>
@@ -32,11 +31,13 @@ class AddDeviceModal extends Component {
                             <Form.Label>Nickname</Form.Label>
                             <Form.Control name="Name" type="text" placeholder="Device Nickname" onChange={this.props.onFormTextChange("Name")} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Add Device
-                        </Button>
-                    </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" type="submit">
+                        Add Device
+                    </Button>
+                </Modal.Footer>
+                </Form>
             </Modal>
         )
     }
