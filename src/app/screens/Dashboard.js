@@ -209,7 +209,6 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <h1>Dashboard</h1>
                 <DeletedAlert 
                     show={this.state.showDeletedAlert}
                     onClose={this.onAlertClosed} />
