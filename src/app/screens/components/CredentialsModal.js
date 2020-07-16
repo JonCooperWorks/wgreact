@@ -15,6 +15,12 @@ class CredentialsModal extends Component {
                     <Modal.Title>Credentials</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <p
+                        style={{margin: "0 auto", display: "block"}}>
+                            This is your Wireguard private key.
+                            Store it in a safe place.
+                            You will not be able to download this key again after it is created.
+                    </p>
                     <QRCode
                         value={this.props.config} 
                         size={256}
