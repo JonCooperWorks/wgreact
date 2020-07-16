@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import OSBadge from "./OSBadge";
+import CopyableValue from "./CopyableValue";
 
 
 class Device extends Component {
@@ -13,9 +14,16 @@ class Device extends Component {
                     <OSBadge OS={this.props.device.OS} />
                     {this.props.device.Name}
                 </Card.Title>
+                <Card.Subtitle
+                    className="text-muted"
+                    style={{marginLeft: "5px"}}>{this.props.device.OS}</Card.Subtitle>
                 <Card.Body>
-                    <p>{this.props.device.PublicKey}</p>
-                    <p>{this.props.device.IPAddress}</p>
+                    <CopyableValue
+                        value={this.props.device.PublicKey} /> 
+                            
+                    <CopyableValue
+                        value= {this.props.device.IPAddress} />
+
                     <Button 
                         variant="warning"
                         onClick={this.props.onRekeyDevice}>
