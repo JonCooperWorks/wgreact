@@ -8,7 +8,9 @@ import { BsPlus } from 'react-icons/bs'
 class Navigation extends Component {
     render() {
         return (
-            <Navbar>
+            <Navbar
+                sticky="top"
+                bg="light">
                 <Navbar.Brand>{document.domain}</Navbar.Brand>
                     <Nav className="mr-auto">
                     </Nav>

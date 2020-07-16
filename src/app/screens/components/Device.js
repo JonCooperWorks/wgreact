@@ -38,13 +38,21 @@ class Device extends Component {
                     </Card.Body>
                     <Card.Footer>
                         <Button 
-                            style={{marginRight: "5px"}}
+                            style={{
+                                marginRight: "5px",
+                                marginBottom: "5px",
+                                marginTop: "5px"
+                            }}
                             variant="warning"
                             onClick={this.props.onRekeyDevice}>
                                 Regenerate Credentials
                             </Button>
                         <Button 
-                            style={{marginLeft: "5px"}}
+                            style={{
+                                marginLeft: "5px",
+                                marginBottom: "5px",
+                                marginTop: "5px"
+                            }}
                             variant="danger"
                             onClick={this.props.onDeleteDevice}>
                                 Revoke Access
