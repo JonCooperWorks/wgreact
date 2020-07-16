@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import  Button from 'react-bootstrap/Button';
 import FileSaver from 'file-saver';
 
+import { BsPlus } from 'react-icons/bs'
+
 import AddDeviceModal from './components/AddDeviceModal';
 import ConfirmRekeyModal from './components/ConfirmRekeyModal'
 import ConfirmDeleteModal from './components/ConfirmDeleteModal'
@@ -237,7 +239,13 @@ class Dashboard extends Component {
                     onDeleteDevice={this.onDeviceDeleted}
                     device={this.state.deviceToDelete} />
 
-                <Button variant="success" onClick={this.onAddDeviceClicked}>Add device</Button>
+                <Button 
+                    style={{margin: "10px"}}
+                    variant="success" 
+                    onClick={this.onAddDeviceClicked}>
+                        <BsPlus />
+                        Add device
+                </Button>
 
                 {this.state.devices.map((device, key) =>
                     <Device 
