@@ -39,7 +39,7 @@ class Device extends Component {
                     <Card.Footer>
                         <Button 
                             style={{
-                                marginRight: "5px",
+                                marginRight: "10px",
                                 marginBottom: "5px",
                                 marginTop: "5px"
                             }}
@@ -49,7 +49,6 @@ class Device extends Component {
                             </Button>
                         <Button 
                             style={{
-                                marginLeft: "5px",
                                 marginBottom: "5px",
                                 marginTop: "5px"
                             }}
