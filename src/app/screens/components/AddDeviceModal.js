@@ -18,7 +18,12 @@ class AddDeviceModal extends Component {
                 <Modal.Body>
                         <Form.Group controlId="formDeviceOS">
                             <Form.Label>Device OS</Form.Label>
-                            <Form.Control name="OS" as="select" custom onChange={this.props.onFormTextChange("OS")}>
+                            <Form.Control
+                                name="OS"
+                                as="select"
+                                custom
+                                required>
+                                <option>Select Device OS</option>
                                 <option value="macOS">macOS</option>
                                 <option value="Windows">Windows</option>
                                 <option value="Linux">Linux</option>
@@ -29,7 +34,12 @@ class AddDeviceModal extends Component {
 
                         <Form.Group controlId="formDeviceName">
                             <Form.Label>Nickname</Form.Label>
-                            <Form.Control name="Name" type="text" placeholder="Device Nickname" onChange={this.props.onFormTextChange("Name")} />
+                            <Form.Control 
+                                name="Name"
+                                type="text"
+                                placeholder="Device Nickname"
+                                onChange={this.props.onFormTextChange("Name")}
+                                required />
                         </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>

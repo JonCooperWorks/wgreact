@@ -26,7 +26,7 @@ class Dashboard extends Component {
             displayedCredentials: "",
             newDevice: {
                 Name: "",
-                OS: "macOS" // Default option in the Form.Control
+                OS: ""
             },
             deviceToDelete: {},
             deviceToRekey: {}
