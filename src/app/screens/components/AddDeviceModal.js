@@ -22,7 +22,8 @@ class AddDeviceModal extends Component {
                                 name="OS"
                                 as="select"
                                 custom
-                                required>
+                                required
+                                onChange={this.props.onFormTextChange("OS")}>
                                 <option>Select Device OS</option>
                                 <option value="macOS">macOS</option>
                                 <option value="Windows">Windows</option>
